@@ -15,13 +15,13 @@ namespace DumpMes
         {
             string dlgfile = "01013Dante.dlg";
             ArcText obj2;
-            using (var reader2 = new StreamReader(new FileStream(dlgfile, FileMode.Open)))
+            using (var reader2 = new StreamReader(new FileStream(dlgfile, FileMode.Open), Encoding.GetEncoding("windows-1251")))
             {
                 obj2 = new ArcText(reader2).Parse();
             }
 
             Console.WriteLine(obj2.getEntryCount());
-            Console.WriteLine(obj2.getEntryWithIndex(11).ToString());
+            Console.WriteLine(obj2.getEntryWithIndex(11).getItem(MESFIELD.ITEM_TEXT));
 
 
             Console.Read();

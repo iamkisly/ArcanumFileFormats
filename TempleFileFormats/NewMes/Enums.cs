@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace TempleFileFormats.Mes
 {
-    public enum MESTYPE
+    public enum MESTYPE : int
     {
         MES = 0,
         DLG
     }
 
-    public enum DLGFIELD
+    public enum MESFIELD : int
     {
-        COMMENT = -2,
-        INDEX = -1,
-        ITEM_TEXT = 0,
-        ITEM_G = 1,
-        ITEM_I = 2,
-        ITEM_TEST = 3,
-        ITEM_R = 4,
-        ITEM_RESULT = 5
+        COMMENT = -1,
+        INDEX = 0,
+        ITEM_TEXT = 1,
+        ITEM_G = 2,
+        ITEM_I = 3,
+        ITEM_TEST = 4,
+        ITEM_R = 5,
+        ITEM_RESULT = 6
     }
 
     public enum Gender : int

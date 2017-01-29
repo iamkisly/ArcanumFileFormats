@@ -57,6 +57,11 @@ namespace TempleFileFormats.Mes
             return valid;
         }
 
+        public string getItem(MESFIELD field)
+        {
+            return data[(int)field];
+        }
+
         protected bool valid = false;
         protected int index = 0;
         protected int itemCount = 0;
