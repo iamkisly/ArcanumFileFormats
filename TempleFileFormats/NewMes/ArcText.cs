@@ -1,40 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TempleFileFormats.Mes
 {
-    public class ArcText<T>
+    public class ArcText
     {
-        /** The initial comment - before the first line that begins with '{'*/
-        protected string headerComment = String.Empty;
+        protected Dictionary<int, Entry> Entries;
+        private StreamReader reader;
 
-        protected Dictionary<int, T> Entries;
+        public ArcText(StreamReader reader)
+        {
+            this.reader = reader;
+        }
+
+        public ArcText Parse()
+        {
+            ArcText m = new ArcText(this.reader);
+            m.Init();
+
+            while (true)
+            {
+                string temp = reader.ReadLine();
+
+                if (temp != null && temp != "")
+                {
+                    temp = temp.TrimStart(new char[] { ' ', '\t' });
+                    if (temp.StartsWith("//")) continue;
+
+                    Entry me = new Entry(temp);
+
+                    if (!m.ExistEntryWithIndex(me.getIndex()))
+                        m.AddEntry(me.getIndex(), me);
+                }
+                if (temp == null)
+                {
+                    break;
+                }
+            }
+
+            return m;
+        }
 
         public void Dispose()
         {
             Clear();
         }
 
-        public void Init()
-        {
-            Entries = new Dictionary<int, T>();
-        }
-
-        public bool isLoaded()
-        {
-            return loaded;
-        }
-
         public void Clear()
         {
-            headerComment = String.Empty;
             if (Entries.Count > 0)
             {
                 Entries.Clear();
             }
+        }
+
+        public void Init()
+        {
+            Entries = new Dictionary<int, Entry>();
+        }
+
+
+        // verify
+
+        public bool isLoaded()
+        {
+            return loaded;
         }
 
         public int getEntryCount()
@@ -42,19 +76,7 @@ namespace TempleFileFormats.Mes
             return Entries.Count;
         }
 
-        public bool isEntryContain(int key)
-        {
-            return Entries.ContainsKey(key);
-        }
-
-        protected int itemCount = 0;
-
-        public virtual int getItemCount()
-        {
-            return itemCount;
-        }
-
-        public T getEntryWithIndex(int index)
+        public Entry getEntryWithIndex(int index)
         {
             return Entries[index];
         }
@@ -64,12 +86,12 @@ namespace TempleFileFormats.Mes
             return Entries.ContainsKey(index);
         }
 
-        public T newEntry(string[] args)
+        public Entry newEntry(string[] args)
         {
-            return (T)Activator.CreateInstance(typeof(T), new object[] { args });
+            return new Entry( args );
         }
 
-        public bool AddEntry(int index, T entry)
+        public bool AddEntry(int index, Entry entry)
         {
             try
             {
@@ -117,5 +139,8 @@ namespace TempleFileFormats.Mes
 
         protected int index = 0;
         protected bool loaded = false;
+        protected int itemCount = 0;
+        private string temp;
     }
+
 }

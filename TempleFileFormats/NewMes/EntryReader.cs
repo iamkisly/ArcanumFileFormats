@@ -9,13 +9,11 @@ using System.Text.RegularExpressions;
 
 namespace TempleFileFormats.Mes
 {
-    public abstract class EntryReader
+    public class EntryReader
     {
-        protected StreamReader reader;
-
         public EntryReader(StreamReader reader)
         {
-            this.reader = reader;
+            this.input = reader.ReadLine();
         }
 
         public EntryReader(string input) 
@@ -42,8 +40,10 @@ namespace TempleFileFormats.Mes
             return Parse(this.input);
         }
 
+        protected string input;
+
         protected string pattern = @"{(.*?)}";
         protected string substitution = @"$1";
-        protected string input;
+
     }
 }

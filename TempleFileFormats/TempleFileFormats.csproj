@@ -59,6 +59,7 @@
     <Compile Include="Maps\Sector.cs" />
     <Compile Include="Maps\SectorIo.cs" />
     <Compile Include="NewMes\ArcText.cs" />
+    <Compile Include="NewMes\Enums.cs" />
     <Compile Include="NewMes\Entry.cs" />
     <Compile Include="NewMes\EntryReader.cs" />
     <Compile Include="Objects\Fields\obj_f_critter_spell_tech.cs" />
