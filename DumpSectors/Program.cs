@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TempleFileFormats.Maps;
-using TempleFileFormats.Objects;
+using ArcanumFileFormats.Maps;
+
 
 namespace DumpSectors
 {
@@ -108,25 +108,9 @@ namespace DumpSectors
 
                 foreach (var obj in sector.Objects)
                 {
-                    w.WriteLine("{1} {0}", obj.Id, obj.Type);
-                    w.WriteLine("  Proto ID {0}", obj.ProtoId);
-                    foreach (var prop in obj.Properties)
-                    {
-                        if (prop.Value is IEnumerable)
-                        {
-                            IEnumerable e = prop.Value as IEnumerable;
-                            List<string> vals = new List<string>();
-                            foreach (var k in e) {
-                                vals.Add(k == null ? "null" : k.ToString());
-                            }
-                            w.WriteLine("  {0}: {1}", prop.Key, string.Join(", ", vals));
-                        }
-                        else
-                        {
-                            w.WriteLine("  {0}: {1}", prop.Key, prop.Value);
-                        }
-                        
-                    }
+					w.WriteLine("{1} {0}", obj.Header.ObjectId, obj.Header.GameObjectType);
+					w.WriteLine("  Proto ID {0}", obj.Header.ProtoId);
+
                     w.WriteLine();
                 }
             }

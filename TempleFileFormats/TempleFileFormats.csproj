@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JsonFx.Json">
-      <HintPath>..\JsonFx.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -45,6 +42,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Color.cs" />
@@ -62,28 +62,44 @@
     <Compile Include="NewMes\Enums.cs" />
     <Compile Include="NewMes\Entry.cs" />
     <Compile Include="NewMes\EntryReader.cs" />
-    <Compile Include="Objects\Fields\obj_f_critter_spell_tech.cs" />
-    <Compile Include="Objects\Fields\obj_f_critter_tech_skill.cs" />
-    <Compile Include="Objects\Fields\obj_f_critter_basic_skill.cs" />
-    <Compile Include="Objects\Fields\obj_f_resistance.cs" />
-    <Compile Include="Objects\Fields\obj_f_scripts.cs" />
-    <Compile Include="Objects\ObjectFlags.cs" />
-    <Compile Include="Objects\GameObject.cs" />
-    <Compile Include="Objects\GameObjectReader.cs" />
-    <Compile Include="Objects\ObjectField.cs" />
-    <Compile Include="Objects\ObjectFieldBitmap.cs" />
-    <Compile Include="Objects\ObjectFieldDefs.cs" />
-    <Compile Include="Objects\ObjectFieldDefs.gen.cs" />
-    <Compile Include="Objects\ObjectFlagsReader.cs" />
-    <Compile Include="Objects\ObjectGuid.cs" />
-    <Compile Include="Objects\ObjectScript.cs" />
-    <Compile Include="Objects\ObjectType.cs" />
-    <Compile Include="Objects\ObjectTypeFields.cs" />
-    <Compile Include="Objects\Fields\obj_f_critter_stat_base.cs" />
+    <Compile Include="ObjectsNew\GameObject.cs" />
+    <Compile Include="ObjectsNew\GameObjectHeaderReader.cs" />
+    <Compile Include="ObjectsNew\GameObjectReader.cs" />
+    <Compile Include="ObjectsNew\Legacy\ObjectBitmapFields.cs" />
+    <Compile Include="ObjectsNew\Legacy\ObjectFieldBitmap.cs" />
+    <Compile Include="ObjectsNew\Legacy\ObjectGuid.cs" />
+    <Compile Include="ObjectsNew\Legacy\ObjectScript.cs" />
+    <Compile Include="ObjectsNew\Legacy\ObjectType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\BinaryReaderUtils.cs" />
     <Compile Include="Utils\BinaryWriterUtils.cs" />
     <Compile Include="Utils\MarshalUtils.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Ammo.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Armor.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Common.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Container.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Critter.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Food.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Generic.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Gold.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Item.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Key.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\KeyRing.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\NPC.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\PC.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Portal.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Projectile.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Scenery.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Scroll.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Trap.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Wall.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Weapon.cs" />
+    <Compile Include="ObjectsNew\ObjectClass\Written.cs" />
+    <Compile Include="ObjectsNew\GameObjectHeader.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

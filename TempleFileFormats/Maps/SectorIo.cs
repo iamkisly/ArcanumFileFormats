@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TempleFileFormats.Objects;
-using TempleFileFormats.Utils;
+using ArcanumFileFormats.ObjectsNew;
+using ArcanumFileFormats.ObjectsNew.Legacy;
+using ArcanumFileFormats.Utils;
 
-namespace TempleFileFormats.Maps
+namespace ArcanumFileFormats.Maps
 {
 	public class SectorIo
 	{
@@ -207,9 +208,9 @@ namespace TempleFileFormats.Maps
 			var count = reader.ReadInt32();
 			stream.Seek(startOfObjects, SeekOrigin.Begin);
 
-			var objReader = new GameObjectReader(reader);
+            var objReader = new GameObjectReader(reader);
 
-			for (var i = 0; i < count; ++i)
+            for (var i = 0; i < count; ++i)
 			{
                 Console.Write(i.ToString() + " ->");
                 Console.WriteLine(reader.BaseStream.Position.ToString("X4"));

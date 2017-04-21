@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TempleFileFormats.Utils;
+using ArcanumFileFormats.Utils;
 
-namespace TempleFileFormats.Jmp
+namespace ArcanumFileFormats.Jmp
 {
 	public class JmpReader
 	{

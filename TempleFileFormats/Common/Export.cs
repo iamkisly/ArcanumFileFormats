@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using JsonFx = Pathfinding.Serialization.JsonFx;
+using Newtonsoft.Json;
 
-namespace TempleFileFormats.Common
+namespace ArcanumFileFormats.Common
 {
 	public class Export<T>
 	{
@@ -15,7 +15,7 @@ namespace TempleFileFormats.Common
 		public Export(T obj)
 		{
 			this.obj = obj;
-			text = JsonFx.JsonWriter.Serialize(obj);
+			text = JsonConvert.SerializeObject(obj);
 		}
 
 		public string GetText()

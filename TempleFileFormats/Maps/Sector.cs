@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TempleFileFormats.Common;
-using TempleFileFormats.Objects;
+using ArcanumFileFormats.Common;
+using ArcanumFileFormats.ObjectsNew;
+using ArcanumFileFormats.ObjectsNew.Legacy;
 
-namespace TempleFileFormats.Maps
+namespace ArcanumFileFormats.Maps
 {
 	public class Sector
 	{

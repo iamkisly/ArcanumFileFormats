@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TempleFileFormats.Mes
+namespace ArcanumFileFormats.Mes
 {
     public enum MESTYPE : int
     {

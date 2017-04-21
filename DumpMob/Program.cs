@@ -5,31 +5,65 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TempleFileFormats.Objects;
-using TempleFileFormats.Common;
+using ArcanumFileFormats.ObjectsNew;
+using ArcanumFileFormats.ObjectsNew.Legacy;
+using ArcanumFileFormats.Common;
+using ArcanumFileFormats.Config;
+using System.Reflection;
+using System.ComponentModel;
 
 namespace DumpObj
 {
 	class Program
 	{
-		private static int ObjRead = 0;
+        private static int ObjRead = 0;
 
 		static void Main(string[] args)
 		{
-			//args = new string[] { "G_8C6BA44F_6CA6_4A37_BDC4_388F1734DE15.mob" };
-            args = new string[] { "G_C13C68B0_08E4_42FD_97EE_AFBCC6CD308B.mob" };
-            //args = new string[] { "G_A3AA4341_235F_4EF9_8B34_9205FC970D99.mob" };
-			//args = new string[] { "001020 - Wall.pro" };
-            //args = new string[] { "016086 - PC.pro" };
 
-			if (args.Length != 1)
+			args = new string[] { "G_7FF2711B_119E_4315_9472_1A7F4E7F3E72.mob", /*@"/home/me/workspace/proto_1/"*/ @"F:\proto_1" };
+
+            if (args.Length != 1)
 			{
 				Console.WriteLine("Usage: DumpObj <Obj-filename|directory>");
 			}
 
 			var path = args[0];
+            var path_to_proto = args[1];
 
-			if (Directory.Exists(path))
+            if (Directory.Exists(path_to_proto))
+            {
+                foreach (var file in Directory.EnumerateFiles(path_to_proto, "*.pro", SearchOption.AllDirectories))
+                {
+                    GameObject obj;
+                    using (var reader = new BinaryReader(new FileStream(file, FileMode.Open)))
+                    {
+						//if (file == path_to_proto + "\\016086 - PC.pro") 
+						{
+							obj = new GameObjectReader (reader).Read (); //TODO: use GameObjectReader only for tests! in prodaction use GameObjectHeaderReader
+                            obj.Header.filename = file;
+
+                            ObjectConfig.ObjectList.Add (obj);
+							Console.Write (file + "  ");
+							Console.Write (obj.Header.ObjectId.ToString () + "  ");
+
+
+
+                            Console.WriteLine((reader.BaseStream.Position == reader.BaseStream.Length).ToString() + "  " + reader.BaseStream.Position.ToString() + "  " + reader.BaseStream.Length.ToString());
+
+							if (reader.BaseStream.Position != reader.BaseStream.Length) {
+                                Console.WriteLine(" !!! not full reading !!!");
+                                Console.Read ();
+							}
+								
+						}
+                    }
+                }
+            }
+
+
+
+            if (Directory.Exists(path))
 			{
 				DumpAllIn(path);
 			}
@@ -47,9 +81,9 @@ namespace DumpObj
 			Console.ReadKey();
 		}
 
-		private static void DumpAllIn(string filename)
+		private static void DumpAllIn(string dirname)
 		{
-			foreach (var file in Directory.EnumerateFiles(filename, "*.mob", SearchOption.AllDirectories))
+			foreach (var file in Directory.EnumerateFiles(dirname, "*.mob", SearchOption.AllDirectories))
 			{
 				using (var w1 = new StreamWriter(file + ".json", false, Encoding.UTF8, 8192))
 				{
@@ -71,28 +105,10 @@ namespace DumpObj
 				obj = new GameObjectReader(reader).Read();
 			}
 
-			Console.WriteLine("{0}", obj.Type);
-            Console.WriteLine("  ObjectID {0}", obj.Id);
-			Console.WriteLine("  Proto_ID {0}", obj.ProtoId);
+			Console.WriteLine("{0}", obj.Header.GameObjectType);
+            Console.WriteLine("  ObjectID {0}", obj.Header.ObjectId.ToString());
+			Console.WriteLine("  Proto_ID {0}", obj.Header.ProtoId.ToString());
             Console.WriteLine("\n");
-
-			foreach (var prop in obj.Properties)
-			{
-				if (prop.Value is IEnumerable && !(prop.Value is string))
-				{
-					IEnumerable e = prop.Value as IEnumerable;
-					List<string> vals = new List<string>();
-					foreach (var k in e)
-					{
-						vals.Add(k == null ? "null" : k.ToString());
-					}
-					Console.WriteLine("  {0}: {1}", prop.Key, string.Join(", ", vals));
-				}
-				else
-				{
-					Console.WriteLine("  {0}: {1}", prop.Key, prop.Value);
-				}
-			}
 
 			w.WriteLine(new Export<GameObject>(obj).GetText());
 

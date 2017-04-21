@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 
-namespace TempleFileFormats.Mes
+namespace ArcanumFileFormats.Mes
 {
     public class EntryReader
     {

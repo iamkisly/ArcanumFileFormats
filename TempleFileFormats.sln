@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempleFileFormats", "TempleFileFormats\TempleFileFormats.csproj", "{FAB78FD9-5F17-45CC-859E-ACC7A3D6C837}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcanumFileFormats", "TempleFileFormats\ArcanumFileFormats.csproj", "{FAB78FD9-5F17-45CC-859E-ACC7A3D6C837}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{BCB37FF9-E2D7-4935-87A2-E42037B2BA55}"
 EndProject
@@ -11,11 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumpObj", "DumpMob\DumpObj.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumpFacWalk", "DumpFacWalk\DumpFacWalk.csproj", "{786BBAD9-4003-4704-9ED1-D39EFBDE414C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumpJmp", "DumpJmp\DumpJmp.csproj", "{17A72484-BDE2-4150-98C7-586D675E3D82}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumpSectors", "DumpSectors\DumpSectors.csproj", "{831DA75B-2945-4152-9F8C-78741DEBF023}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DumpMes", "DumpMes\DumpMes.csproj", "{CC6501EA-FEBA-4D96-A481-59F0B0A4B76B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mobster", "Mobster\Mobster.csproj", "{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,18 +59,6 @@ Global
 		{786BBAD9-4003-4704-9ED1-D39EFBDE414C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{786BBAD9-4003-4704-9ED1-D39EFBDE414C}.Release|Win32.ActiveCfg = Release|Any CPU
 		{786BBAD9-4003-4704-9ED1-D39EFBDE414C}.Release|Win32.Build.0 = Release|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Debug|Win32.Build.0 = Debug|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Release|Win32.ActiveCfg = Release|Any CPU
-		{17A72484-BDE2-4150-98C7-586D675E3D82}.Release|Win32.Build.0 = Release|Any CPU
 		{831DA75B-2945-4152-9F8C-78741DEBF023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{831DA75B-2945-4152-9F8C-78741DEBF023}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{831DA75B-2945-4152-9F8C-78741DEBF023}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -93,6 +81,18 @@ Global
 		{CC6501EA-FEBA-4D96-A481-59F0B0A4B76B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CC6501EA-FEBA-4D96-A481-59F0B0A4B76B}.Release|Win32.ActiveCfg = Release|Any CPU
 		{CC6501EA-FEBA-4D96-A481-59F0B0A4B76B}.Release|Win32.Build.0 = Release|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Debug|Win32.Build.0 = Debug|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Release|Win32.ActiveCfg = Release|Any CPU
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA}.Release|Win32.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,8 +100,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{90B50DEA-55A1-4294-91BA-F242DC212282} = {BCB37FF9-E2D7-4935-87A2-E42037B2BA55}
 		{786BBAD9-4003-4704-9ED1-D39EFBDE414C} = {BCB37FF9-E2D7-4935-87A2-E42037B2BA55}
-		{17A72484-BDE2-4150-98C7-586D675E3D82} = {BCB37FF9-E2D7-4935-87A2-E42037B2BA55}
 		{831DA75B-2945-4152-9F8C-78741DEBF023} = {BCB37FF9-E2D7-4935-87A2-E42037B2BA55}
 		{CC6501EA-FEBA-4D96-A481-59F0B0A4B76B} = {BCB37FF9-E2D7-4935-87A2-E42037B2BA55}
+		{F5ED3BCA-62FC-4DA0-A7D7-C306BBB52ECA} = {BCB37FF9-E2D7-4935-87A2-E42037B2BA55}
 	EndGlobalSection
 EndGlobal

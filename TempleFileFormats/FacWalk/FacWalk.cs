@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TempleFileFormats.FacWalk
+namespace ArcanumFileFormats.FacWalk
 {
 	public class FacWalk
 	{

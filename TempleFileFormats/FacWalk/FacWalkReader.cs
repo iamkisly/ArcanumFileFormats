@@ -6,9 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TempleFileFormats.Utils;
+using ArcanumFileFormats.Utils;
 
-namespace TempleFileFormats.FacWalk
+namespace ArcanumFileFormats.FacWalk
 {
 	public class FacWalkReader
 	{

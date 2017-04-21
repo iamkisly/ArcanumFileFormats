@@ -7,7 +7,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 
 
-namespace TempleFileFormats.Utils
+namespace ArcanumFileFormats.Utils
 {
 	public static class MarshalUtils
 	{
@@ -34,7 +34,7 @@ namespace TempleFileFormats.Utils
 			return ByteArrayToStructure<T>(temp);
 		}
 
-		public static T ByteArrayToStructure<T>(BinaryReader reader) where T : struct
+		public static T ByteArrayToStructure<T>(BinaryReader reader) //where T : struct
 		{
 			int count = Marshal.SizeOf(typeof(T));
 			byte[] bytes = new byte[count];

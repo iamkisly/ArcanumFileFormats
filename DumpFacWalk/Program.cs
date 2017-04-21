@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TempleFileFormats.FacWalk;
-using TempleFileFormats.Common;
+using ArcanumFileFormats.FacWalk;
+using ArcanumFileFormats.Common;
 
 namespace DumpFacWalk
 {
