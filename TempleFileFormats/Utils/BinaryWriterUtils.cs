@@ -7,6 +7,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using ArcanumFileFormats.Config;
+using System.Runtime.InteropServices;
 
 namespace ArcanumFileFormats.Utils
 {
@@ -36,10 +38,11 @@ namespace ArcanumFileFormats.Utils
 
         public static void WriteArtId(this BinaryWriter writer, ArtId id)
         {
-            writer.Write(Int32.Parse("0x" + id.path));
+			Int32 i = Convert.ToInt32(id.path, 16);
+			writer.Write(i);
         }
 
-        public static void WriteArtId(this BinaryWriter writer, Location loc)
+		public static void WriteLocation(this BinaryWriter writer, Location loc)
         {
             if (loc.X != 0 && loc.Y != 0)
             {
@@ -55,10 +58,10 @@ namespace ArcanumFileFormats.Utils
 
         public static void WriteObjectGuid(this BinaryWriter writer, ObjectGuid obj)
         {
-            WriteObjectGuid(writer, obj, false);
+            WriteObjectGuid_(writer, obj, false);
         }
 
-        public static void WriteObjectGuid(this BinaryWriter writer, ObjectGuid obj, bool wo_header)
+        public static void WriteObjectGuid_(this BinaryWriter writer, ObjectGuid obj, bool wo_header)
         {
             //
             if(!wo_header)
@@ -92,7 +95,7 @@ namespace ArcanumFileFormats.Utils
             writer.Write(unk.Unk);
         }
 
-        public static void ReadArray0<T>(this BinaryWriter writer, T[] unk)
+		public static void WriteArray<T>(this BinaryWriter writer, Tuple<T[], Int32[]> unk)
         {
             if (unk == null)
             {
@@ -102,19 +105,29 @@ namespace ArcanumFileFormats.Utils
             else
             {
                 writer.Write((byte)0x01);
-
-                writer.Write(0x00); //TODO: Inr32
-                writer.Write(unk.Length);
-                var headerUnk = new Random().Next();
+				int size = Marshal.SizeOf (default(T));
+				writer.Write(size); //TODO: Inr32
+				writer.Write(unk.Item1.Length);
+				var headerUnk = ObjectConfig.random.Next();
                 writer.Write(headerUnk);
 
                 Type this_type = MethodBase.GetCurrentMethod().DeclaringType;
                 MethodInfo WriteMethod = this_type.GetMethod("Write" + typeof(T).Name);
 
-                for (int i = 0; i < unk.Length; i++)
+				for (int i = 0; i < unk.Item1.Length; i++)
                 {
-                    WriteMethod.Invoke(this_type, new Object[] { writer });
+					WriteMethod.Invoke(this_type, new Object[] { writer, unk.Item1[i] });
                 }
+
+				int count = unk.Item2.Length;
+
+				writer.Write(count);
+
+				for (var j = 0; j < count; j++)
+				{
+					writer.Write (unk.Item2 [j]);
+				}
+
             }
         }
 

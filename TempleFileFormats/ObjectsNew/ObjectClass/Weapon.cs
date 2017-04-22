@@ -11,9 +11,9 @@ namespace ArcanumFileFormats.ObjectsNew
 		[Order(61)] public Int32 obj_f_weapon_paper_doll_aid {get; set;} //string
 		[Order(62)] public Int32 obj_f_weapon_bonus_to_hit {get; set;}
 		[Order(63)] public Int32 obj_f_weapon_magic_hit_adj {get; set;}
-		[Order(64)] public Int32[] obj_f_weapon_damage_lower_idx {get; set;}
-		[Order(65)] public Int32[] obj_f_weapon_damage_upper_idx {get; set;}
-		[Order(66)] public Int32[] obj_f_weapon_magic_damage_adj_idx {get; set;}
+		[Order(64)] public Tuple<Int32[], Int32[]> obj_f_weapon_damage_lower_idx {get; set;}
+		[Order(65)] public Tuple<Int32[], Int32[]> obj_f_weapon_damage_upper_idx {get; set;}
+		[Order(66)] public Tuple<Int32[], Int32[]> obj_f_weapon_magic_damage_adj_idx {get; set;}
 		[Order(67)] public Int32 obj_f_weapon_speed_factor {get; set;}
 		[Order(68)] public Int32 obj_f_weapon_magic_speed_adj {get; set;}
 		[Order(69)] public Int32 obj_f_weapon_range {get; set;}

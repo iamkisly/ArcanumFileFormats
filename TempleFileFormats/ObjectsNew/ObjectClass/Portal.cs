@@ -13,8 +13,8 @@ namespace ArcanumFileFormats.ObjectsNew
 		[Order(40)] public Int32 obj_f_portal_notify_npc {get; set;}
 
 		[Order(41)] public Int32 obj_f_portal_pad_i_1 {get; set;}
-		[Order(42)]public Int32 obj_f_portal_pad_i_2 {get; set;}
-		[Order(43)]public Unknown obj_f_portal_pad_ias_1 {get; set;}
-		[Order(44)]public Unknown obj_f_portal_pad_i64as_1 {get; set;}
+		[Order(42)] public Int32 obj_f_portal_pad_i_2 {get; set;}
+		[Order(43)] public Unknown obj_f_portal_pad_ias_1 {get; set;}
+		[Order(44)] public Unknown obj_f_portal_pad_i64as_1 {get; set;}
     }
 }

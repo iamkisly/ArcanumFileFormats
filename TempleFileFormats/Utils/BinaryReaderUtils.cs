@@ -114,9 +114,7 @@ namespace ArcanumFileFormats.Utils
             return script;
         }
 
-
-
-        public static T[] ReadArray0<T>(this BinaryReader reader, bool skipflags)
+		public static Tuple<T[], int[]> ReadArray<T>(this BinaryReader reader)
         {
             if (reader.ReadByte() == 0x00)
             {
@@ -130,6 +128,7 @@ namespace ArcanumFileFormats.Utils
             var payloadSize = elementCount * elementSize;
 
             List<T> result = null;
+			Int32[] flags = null;
 
             if (payloadSize > 0)
             {
@@ -144,28 +143,19 @@ namespace ArcanumFileFormats.Utils
 					var obj = ReadMethod.Invoke (this_type, new Object[] {reader});
 					result.Add ((T)obj);
                 }
-                if (skipflags)
+                var count = reader.ReadInt32();
+				flags = new Int32[count];
+
+                for (var i = 0; i < count; i++)
                 {
-                    var count = reader.ReadInt32();
-                    for (var i = 0; i < count; i++)
-                    {
-                        reader.ReadUInt32();
-                    }
-
-                    return result.ToArray();
+					flags[i] = reader.ReadInt32();
                 }
+
+
+				return new Tuple<T[], int[]>(result.ToArray(), flags);
             }
-            return null;
+			return null;
         }
-
-		//TODO: от безысходности
-		public static T[] ReadArray<T>(this BinaryReader reader)
-		{
-			return ReadArray0<T> (reader, true);
-		}
-
-
-			
     }
 
     static class BitArrayUtils

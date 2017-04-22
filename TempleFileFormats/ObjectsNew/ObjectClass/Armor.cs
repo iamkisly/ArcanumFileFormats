@@ -11,8 +11,8 @@ namespace ArcanumFileFormats.ObjectsNew
 		[Order(61)] public Int32 obj_f_armor_paper_doll_aid {get; set;}
 		[Order(62)] public Int32 obj_f_armor_ac_adj {get; set;}
 		[Order(63)] public Int32 obj_f_armor_magic_ac_adj {get; set;}
-		[Order(64)] public Int32[] obj_f_armor_resistance_adj_idx {get; set;}
-		[Order(65)] public Int32[] obj_f_armor_magic_resistance_adj_idx {get; set;}
+		[Order(64)] public Tuple<Int32[], Int32[]> obj_f_armor_resistance_adj_idx {get; set;}
+		[Order(65)] public Tuple<Int32[], Int32[]> obj_f_armor_magic_resistance_adj_idx {get; set;}
 		[Order(66)] public Int32 obj_f_armor_silent_move_adj {get; set;}
 		[Order(67)] public Int32 obj_f_armor_magic_silent_move_adj {get; set;}
 		[Order(68)] public Int32 obj_f_armor_unarmed_bonus_damage {get; set;}

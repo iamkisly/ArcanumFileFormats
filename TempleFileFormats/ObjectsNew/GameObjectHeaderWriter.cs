@@ -9,24 +9,16 @@ using ArcanumFileFormats.ObjectsNew.Legacy;
 using System.Collections;
 using ArcanumFileFormats.ObjectsNew;
 
-namespace TempleFileFormats.ObjectsNew
+namespace ArcanumFileFormats.ObjectsNew
 {
-    public class GameObjectHeaderWriter
+    public static class GameObjectHeaderWriter_
     {
-        readonly BinaryWriter writer;
-        readonly GameObjectHeader header;
 
-        public GameObjectHeaderWriter(BinaryWriter writer, GameObjectHeader header)
-        {
-            this.writer = writer;
-            this.header = header;
-        }
-
-        public void Write()
+		public static void GameObjectHeaderWriter(this BinaryWriter writer, GameObjectHeader header)
         {
 			writer.Write(0x77); //header.version
-            writer.WriteObjectGuid(header.ProtoId);
-            writer.WriteObjectGuid(header.ObjectId);
+            writer.WriteObjectGuid_(header.ProtoId, true);
+			writer.WriteObjectGuid_(header.ObjectId, true);
 			writer.Write ((Int32)header.GameObjectType);
 			if (!header.ProtoId.IsProto ())  //TODO: ARGS & save as proto ?
 			{

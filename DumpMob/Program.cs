@@ -21,7 +21,7 @@ namespace DumpObj
 		static void Main(string[] args)
 		{
 
-			args = new string[] { "G_7FF2711B_119E_4315_9472_1A7F4E7F3E72.mob", /*@"/home/me/workspace/proto_1/"*/ @"F:\proto_1" };
+			args = new string[] { "G_7FF2711B_119E_4315_9472_1A7F4E7F3E72.mob", @"/home/me/workspace/proto_1/" /*@"F:\proto_1"*/ };
 
             if (args.Length != 1)
 			{
@@ -40,7 +40,7 @@ namespace DumpObj
                     {
 						//if (file == path_to_proto + "\\016086 - PC.pro") 
 						{
-							obj = new GameObjectReader (reader).Read (); //TODO: use GameObjectReader only for tests! in prodaction use GameObjectHeaderReader
+							obj = reader.GameObjectReader(); //TODO: use GameObjectReader only for tests! in prodaction use GameObjectHeaderReader
                             obj.Header.filename = file;
 
                             ObjectConfig.ObjectList.Add (obj);
@@ -102,7 +102,7 @@ namespace DumpObj
 			GameObject obj;
 			using (var reader = new BinaryReader(new FileStream(filename, FileMode.Open)))
 			{
-				obj = new GameObjectReader(reader).Read();
+				obj = reader.GameObjectReader();
 			}
 
 			Console.WriteLine("{0}", obj.Header.GameObjectType);
@@ -111,6 +111,15 @@ namespace DumpObj
             Console.WriteLine("\n");
 
 			w.WriteLine(new Export<GameObject>(obj).GetText());
+
+
+			using (var writer = new BinaryWriter (new FileStream (filename+".write.mob", FileMode.OpenOrCreate))) {
+				writer.GameObjectWirter (obj);
+
+				writer.Flush ();
+				writer.Close ();
+				writer.Dispose ();
+			}
 
 		}
 	}

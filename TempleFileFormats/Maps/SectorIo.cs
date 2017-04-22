@@ -208,7 +208,7 @@ namespace ArcanumFileFormats.Maps
 			var count = reader.ReadInt32();
 			stream.Seek(startOfObjects, SeekOrigin.Begin);
 
-            var objReader = new GameObjectReader(reader);
+			//var objReader = reader.GameObjectReader();
 
             for (var i = 0; i < count; ++i)
 			{
@@ -218,7 +218,7 @@ namespace ArcanumFileFormats.Maps
                 {
                     Console.Read();
                 }
-                sector.Objects.Add(objReader.Read());
+				sector.Objects.Add(reader.GameObjectReader());
 			}
 		}
 
