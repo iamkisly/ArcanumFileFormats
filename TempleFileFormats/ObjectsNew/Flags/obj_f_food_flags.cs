@@ -2,10 +2,10 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsWritten
+	[Flags]
+	public enum obj_f_food_flags_
 	{
-		//Obj_Written?_Flag
-		OWRF_NONE = 1
+		OFF_NONE = 1
 	}
 }
 

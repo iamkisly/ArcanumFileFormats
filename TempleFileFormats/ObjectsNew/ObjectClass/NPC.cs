@@ -3,6 +3,7 @@ using System.IO;
 using ArcanumFileFormats.Common;
 using ArcanumFileFormats.ObjectsNew.Legacy;
 using ArcanumFileFormats.Utils;
+using ArcanumFileFormats.ObjectsNew.Flags;
 
 namespace ArcanumFileFormats.ObjectsNew
 {

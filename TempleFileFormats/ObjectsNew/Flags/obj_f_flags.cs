@@ -2,9 +2,9 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsCommon
+	[Flags]
+	public enum obj_f_flags_
 	{
-		//Obj_Flag
 		OF_DESTROYED = 1,
 		OF_OFF,
 		OF_FLAT,

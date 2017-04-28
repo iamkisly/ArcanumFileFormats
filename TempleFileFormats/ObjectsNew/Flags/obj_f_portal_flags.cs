@@ -2,9 +2,9 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsPortal
+	[Flags]
+	public enum obj_f_portal_flags_
 	{
-		//Obj_Portal_Flag
 		OPF_LOCKED = 1,
 		OPF_JAMMED,
 		OPF_MAGICALLY_HELD,

@@ -2,12 +2,13 @@ using System;
 using ArcanumFileFormats.Common;
 using ArcanumFileFormats.ObjectsNew.Legacy;
 using ArcanumFileFormats.Utils;
+using ArcanumFileFormats.ObjectsNew.Flags;
 
 namespace ArcanumFileFormats.ObjectsNew
 {
     public class Wall : Common
     {
-		[Order(37)] public int obj_f_wall_flags {get; set;}
+		[Order(37)] public Int32 obj_f_wall_flags {get; set;}
 
 		[Order(38)] public Int32 obj_f_wall_pad_i_1 {get; set;}
 		[Order(39)] public Int32 obj_f_wall_pad_i_2 {get; set;}

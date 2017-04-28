@@ -2,7 +2,8 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsScenery
+	[Flags]
+	public enum obj_f_scenery_flags_
 	{
 		OSCF_NO_AUTO_ANIMATE = 1,
 		OSCF_BUSTED,

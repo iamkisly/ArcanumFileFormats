@@ -2,9 +2,9 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsSpell
+	[Flags]
+	public enum obj_f_spell_flags_
 	{
-		//Obj_Spell?_Flag - obj_f_spell_flags
 		OSF_INVISIBLE = 1,
 		OSF_FLOATING,
 		OSF_BODY_OF_AIR,

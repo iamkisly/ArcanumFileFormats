@@ -2,9 +2,9 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsItem
+	[Flags]
+	public enum obj_f_item_flags_
 	{
-		//Obj_Item_Flag
 		OIF_IDENTIFIED = 1, //[0] 0x01
 		OIF_WONT_SELL,      //[0] 0x02
 		OIF_IS_MAGICAL,     //[0] 0x04

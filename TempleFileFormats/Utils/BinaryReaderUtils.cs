@@ -156,6 +156,27 @@ namespace ArcanumFileFormats.Utils
             }
 			return null;
         }
+
+		public static T[] ReadObjectFlags<T>(this BinaryReader reader) where T : struct, IConvertible
+		{
+			if (!typeof(T).IsEnum) 
+			{
+				throw new ArgumentException("T must be an enumerated type");
+			}
+
+			T[] result = new T[]{ };
+			UInt32 value = reader.ReadUInt32 (); 
+
+			for(int i = 1; i <= 32; i++) 
+			{
+				var b = (value & (1 << i - 1)) != 0;
+				if (b) 
+				{
+					//result |= ? ;
+				}
+			}
+			return result;
+		}
     }
 
     static class BitArrayUtils

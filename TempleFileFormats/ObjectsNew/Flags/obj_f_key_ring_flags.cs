@@ -2,10 +2,10 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsGold
+	[Flags]
+	public enum obj_f_key_ring_flags_
 	{
-		//Obj_Gold_Flag
-		OGOF_NONE = 1
+		OKRF_PRIMARY_RING = 1
 	}
 }
 

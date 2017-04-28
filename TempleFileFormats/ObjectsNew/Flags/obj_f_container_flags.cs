@@ -2,9 +2,9 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsContainer
+	[Flags]
+	public enum obj_f_container_flags_
 	{
-		//Obj_Container_Flag
 		OCOF_LOCKED = 1,
 		OCOF_JAMMED,
 		OCOF_MAGICALLY_HELD,

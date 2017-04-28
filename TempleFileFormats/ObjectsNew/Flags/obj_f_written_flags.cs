@@ -2,10 +2,10 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsAmmo
+	[Flags]
+	public enum obj_f_written_flags_
 	{
-		//Obj_Ammo_Flag
-		OAF_NONE = 1
+		OWRF_NONE = 1
 	}
 }
 

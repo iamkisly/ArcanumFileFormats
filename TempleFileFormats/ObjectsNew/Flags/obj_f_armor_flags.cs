@@ -2,9 +2,9 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsArmor
+	[Flags]
+	public enum obj_f_armor_flags_
 	{
-		//Obj_Armor_Flag
 		OARF_SIZE_SMALL = 1,
 		OARF_SIZE_MEDIUM,
 		OARF_SIZE_LARGE,

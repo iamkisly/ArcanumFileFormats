@@ -2,10 +2,10 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsKeyRing
+	[Flags]
+	public enum obj_f_trap_flags_
 	{
-		//Obj_Unk_Flag
-		OKRF_PRIMARY_RING = 1
+		OTF_BUSTED = 1
 	}
 }
 

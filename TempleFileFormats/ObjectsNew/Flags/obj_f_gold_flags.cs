@@ -2,10 +2,10 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsScroll
+	[Flags]
+	public enum obj_f_gold_flags_
 	{
-		//Obj_Scroll?_Flag
-		OSRF_NONE
+		OGOF_NONE = 1
 	}
 }
 

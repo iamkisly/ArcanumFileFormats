@@ -2,9 +2,9 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsWall
+	[Flags]
+	public enum obj_f_wall_flags_
 	{
-		//Obj_Wall_Flag
 		OWAF_TRANS_DISALLOW = 1,
 		OWAF_TRANS_LEFT,
 		OWAF_TRANS_RIGHT,

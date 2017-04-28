@@ -2,10 +2,10 @@
 
 namespace ArcanumFileFormats.ObjectsNew.Flags
 {
-	public enum ObjectFlagsFood
+	[Flags]
+	public enum obj_f_scroll_flags_
 	{
-		//Obj_Food_Flag
-		OFF_NONE = 1
+		OSRF_NONE = 1
 	}
 }
 
