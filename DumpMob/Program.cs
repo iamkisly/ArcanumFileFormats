@@ -20,7 +20,7 @@ namespace DumpObj
 
 		static void Main(string[] args)
 		{
-			args = new string[] { "G_6051CDAF_9BCF_4FE2_97C4_48F3ACB248AE.mob", @"/home/me/workspace/proto_1/" /*@"F:\proto_1"*/ };
+			args = new string[] { "G_6051CDAF_9BCF_4FE2_97C4_48F3ACB248AE.mob", @"E:\Новая папка (1)\workspace\proto_1" };
 
             if (args.Length != 1)
 			{
