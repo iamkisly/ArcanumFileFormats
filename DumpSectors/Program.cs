@@ -16,7 +16,7 @@ namespace DumpSectors
         private static int sectorsRead = 0;
 
         static void Main(string[] args)
-        {
+        { /*
             if (args.Length != 1)
             {
                 Console.WriteLine("Usage: DumpSector <sec-filename|directory>");
@@ -24,6 +24,8 @@ namespace DumpSectors
 
             //            var filename = args[0];
             var filename = "0.sec";
+
+
 
             using (var w = new StreamWriter("sector.log", false, Encoding.UTF8, 8192))
             {
@@ -37,7 +39,10 @@ namespace DumpSectors
                     DumpFile(filename, w);
                 }
             }
+            */
 
+            DumpAllIn("", new StreamWriter("E:\\sector.log", false, Encoding.UTF8, 8192));
+            File.WriteAllLines(@"E:\sec_decode_art.txt", TempleFileFormats.Utils.temp.list_art_id.Distinct().ToArray());
             Console.WriteLine("Done. Written {0} sectors to sector.log.", sectorsRead);
             Console.ReadKey();
             
@@ -47,7 +52,12 @@ namespace DumpSectors
         
         private static void DumpAllIn(string filename, StreamWriter w)
         {
-            foreach (var file in Directory.EnumerateFiles(filename, "*.sec", SearchOption.AllDirectories)) {
+            {
+                //DumpFile("e:\\Новая папка (1)\\virtualbox_share\\Arcanum Multiverse Edition\\DATS\\Arcanum\\maps\\Arcanum1-024-fixed\\68920804301.sec", w);
+            }
+            foreach (string file in File.ReadLines(@"E:\sec.txt", Encoding.GetEncoding("windows-1251"))) { 
+                //foreach (var file in Directory.EnumerateFiles(filename, "*.sec", SearchOption.AllDirectories)) {
+
                 DumpFile(file, w);
             }
         }

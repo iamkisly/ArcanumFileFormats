@@ -71,10 +71,14 @@ namespace ArcanumFileFormats.Maps
 				reader.ReadInt32(); // Aptitude Adjustment
 				reader.ReadInt32(); // Light Scheme
 				reader.ReadBytes(12);// Sound List
-				reader.ReadBytes(512);
 			}
+            if (placeholder >= 0xAA0004)
+            {
+                reader.ReadBytes(512);
+            }
+            ReadObjects(reader, sector);
 
-			ReadObjects(reader, sector);
+            if (reader.BaseStream.Position + 4 != reader.BaseStream.Length) throw new Exception();
 
 			return sector;
 		}
@@ -99,7 +103,7 @@ namespace ArcanumFileFormats.Maps
 
 			// Read the basic light information first
 			result.Handle = handle;
-			result.Position = reader.ReadLocation();
+			result.Position = reader.ReadLocation_(true);
 			result.offset_X = reader.ReadInt32();
 			result.offset_Y = reader.ReadInt32();
 			result.FLAGS_0 = reader.ReadInt32();
@@ -143,7 +147,8 @@ namespace ArcanumFileFormats.Maps
 		{
 			for (int i = 0; i < tiles.Length; ++i)
 			{
-				tiles[i].Data = reader.ReadBytes(4);
+				tiles[i].Data = reader.ReadUInt32();
+                TempleFileFormats.Utils.temp.list_art_id.Add(tiles[i].Data.ToString("X2"));
 			}
 		}
 
@@ -162,8 +167,8 @@ namespace ArcanumFileFormats.Maps
 		private void ReadTileScripts(BinaryReader reader, Sector sector)
 		{
 			var count = reader.ReadInt32();
-
-			for (int i = 0; i < count; ++i)
+            //TODO: count > 0
+            for (int i = 0; i < count; ++i)
 			{
 				var script = new TileScript()
 				{
@@ -212,12 +217,6 @@ namespace ArcanumFileFormats.Maps
 
             for (var i = 0; i < count; ++i)
 			{
-                Console.Write(i.ToString() + " ->");
-                Console.WriteLine(reader.BaseStream.Position.ToString("X4"));
-                if(i == count -2)
-                {
-                    Console.Read();
-                }
 				sector.Objects.Add(reader.GameObjectReader());
 			}
 		}

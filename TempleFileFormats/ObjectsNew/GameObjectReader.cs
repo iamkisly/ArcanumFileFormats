@@ -44,16 +44,10 @@ namespace ArcanumFileFormats.ObjectsNew
 				if (readMethod.IsGenericMethod) 
 				{
 					string generic_type_name = prop[i].PropertyType.FullName.Replace ("System.Tuple`2[[", "").Split (new char[]{ ',' })[0].Replace("[]","");
-					readMethod = readMethod.MakeGenericMethod (Type.GetType(generic_type_name));
+                    readMethod = readMethod.MakeGenericMethod (Type.GetType(generic_type_name));
 				}
-
 
 				List<Object> parameters = new List<Object>() { reader };
-				/*
-				if (readMethod.GetParameters ().Length > 1) {
-					parameters.Add (false);
-				}
-				*/
 
 				if (g.Header.bitmap.Get (bit, g.Header.IsPrototype ())) 
 				{
@@ -61,16 +55,19 @@ namespace ArcanumFileFormats.ObjectsNew
 				} 
 				else 
 				{
-					if (prototype != null) 
+					if (prototype != null && prototype.Header.GameObjectType.ToString() == gameobject_obj_type.ToString()) 
 					{
 						Type temp_type = prototype.Obj.GetType ();
 						PropertyInfo temp_property = temp_type.GetProperty (prop [i].Name);
 						Object temp_obj = temp_property.GetValue (prototype.Obj);
 						prop [i].SetValue (g.Obj, temp_obj);
-						//Console.Read ();
 					} 
 				}
 			}
+            foreach (var p in props.Where(item => item.PropertyType.ToString() == "ArcanumFileFormats.Common.ArtId" && item.GetValue(g.Obj) != null).Select(item => ((ArtId)item.GetValue(g.Obj)).path))
+            {
+                TempleFileFormats.Utils.temp.list_art_id.Add(p);
+            }
             return g;
         }
 

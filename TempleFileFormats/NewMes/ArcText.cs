@@ -140,7 +140,6 @@ namespace ArcanumFileFormats.Mes
         protected int index = 0;
         protected bool loaded = false;
         protected int itemCount = 0;
-        private string temp;
     }
 
 }

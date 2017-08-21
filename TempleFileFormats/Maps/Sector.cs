@@ -39,7 +39,7 @@ namespace ArcanumFileFormats.Maps
 
 	public struct SectorTile
 	{
-		public byte[] Data { get; set; }
+		public UInt32 Data { get; set; }
 	}
 
 	public class SectorLight

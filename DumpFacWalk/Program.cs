@@ -65,9 +65,7 @@ namespace DumpFacWalk
 			{
 				obj = new FacWalkReader(reader).Read();
 			}
-
-			w.WriteLine(new Export<FacWalk>(obj).GetText());
-
+            w.WriteLine(new Export<FacWalk>(obj).GetText());
 		}
 	}
 }

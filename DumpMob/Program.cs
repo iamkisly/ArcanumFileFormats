@@ -20,7 +20,7 @@ namespace DumpObj
 
 		static void Main(string[] args)
 		{
-			args = new string[] { "G_6051CDAF_9BCF_4FE2_97C4_48F3ACB248AE.mob", @"E:\Новая папка (1)\workspace\proto_1" };
+            args = new string[] { "G_6051CDAF_9BCF_4FE2_97C4_48F3ACB248AE.mob", @"E:\Новая папка (1)\workspace\proto_1" };
 
             if (args.Length != 1)
 			{
@@ -43,12 +43,13 @@ namespace DumpObj
                             obj.Header.filename = file;
 
                             ObjectConfig.ObjectList.Add (obj);
+                            /*
 							Console.Write (file + "  ");
 							Console.Write (obj.Header.ObjectId.ToString () + "  ");
+                            */
 
 
-
-                            Console.WriteLine((reader.BaseStream.Position == reader.BaseStream.Length).ToString() + "  " + reader.BaseStream.Position.ToString() + "  " + reader.BaseStream.Length.ToString());
+                            //Console.WriteLine((reader.BaseStream.Position == reader.BaseStream.Length).ToString() + "  " + reader.BaseStream.Position.ToString() + "  " + reader.BaseStream.Length.ToString());
 
 							if (reader.BaseStream.Position != reader.BaseStream.Length) {
                                 Console.WriteLine(" !!! not full reading !!!");
@@ -60,8 +61,8 @@ namespace DumpObj
                 }
             }
 
-
-
+            DumpAllIn(path);
+            /*
             if (Directory.Exists(path))
 			{
 				DumpAllIn(path);
@@ -75,26 +76,29 @@ namespace DumpObj
 					w.Close();
 				}
 			}
-
+            */
 			Console.WriteLine("Done. Reading {0} object.", ObjRead);
-			Console.ReadKey();
+            File.WriteAllLines(@"E:\mob_decode_art.txt", TempleFileFormats.Utils.temp.list_art_id.Distinct().ToArray());
+            //Console.ReadKey();
 		}
 
 		private static void DumpAllIn(string dirname)
 		{
-			foreach (var file in Directory.EnumerateFiles(dirname, "*.mob", SearchOption.AllDirectories))
+            foreach (string file in File.ReadLines(@"E:\mob.txt", Encoding.GetEncoding("windows-1251")))
+            //foreach (var file in Directory.EnumerateFiles(dirname, "*.mob", SearchOption.AllDirectories))
 			{
-				using (var w1 = new StreamWriter(file + ".json", false, Encoding.UTF8, 8192))
+				//using (var w1 = new StreamWriter(file + ".json", false, Encoding.UTF8, 8192))
 				{
-					DumpFile(file, w1);
-					w1.Flush();
-					w1.Close();
+					DumpFile(file, null);
+					//w1.Flush();
+					//w1.Close();
 				}
 			}
 
-		}
+        }
 
-		private static void DumpFile(string filename, StreamWriter w)
+
+        private static void DumpFile(string filename, StreamWriter w)
 		{
 			ObjRead++;
 
@@ -103,12 +107,40 @@ namespace DumpObj
 			{
 				obj = reader.GameObjectReader();
 			}
-
+            /*
 			Console.WriteLine("{0}", obj.Header.GameObjectType);
             Console.WriteLine("  ObjectID {0}", obj.Header.ObjectId.ToString());
 			Console.WriteLine("  Proto_ID {0}", obj.Header.ProtoId.ToString());
             Console.WriteLine("\n");
+            */
+/*
+            string[] dictionary = new string[] {
+                "obj_f_armor_paper_doll_aid",
+                "obj_f_current_aid",
+                "obj_f_light_aid",
+                "obj_f_shadow",
+                "obj_f_aid",
+                "obj_f_destroyed_aid",
+                "obj_f_critter_portrait",
+                "obj_f_item_inv_aid",
+                "obj_f_item_use_aid_fragment",
+                "obj_f_weapon_paper_doll_aid",
+                "obj_f_weapon_missile_aid",
+                "obj_f_weapon_visual_effect_aid"
+            };
+            
+            foreach (var s in dictionary)
+            {
+                if(obj.GetType().GetProperty(s) != null)
+                {
+                    ArtId o = (ArtId)GetPropValue(obj, s);
+                    list_art_id.Add(o.path);
+                }
+            }
+            
+*/
 
+            /*
 			w.WriteLine(new Export<GameObject>(obj).GetText());
 
 
@@ -119,7 +151,7 @@ namespace DumpObj
 				writer.Close ();
 				writer.Dispose ();
 			}
-
-		}
-	}
+            */
+        }
+    }
 }

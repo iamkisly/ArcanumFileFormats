@@ -24,13 +24,14 @@ namespace ArcanumFileFormats.Utils
         /// <returns>The string read from the reader.</returns>
         public static PrefixedString ReadPrefixedString(this BinaryReader reader)
         {
-            if (reader.ReadByte() != 0x00)
-            {
-                var length = reader.ReadInt32();
-                var data = reader.ReadBytes(length);
-                return new PrefixedString(Encoding.Default.GetString(data));
-            }
-            return null;
+            var flag = reader.ReadByte();
+            if (flag == 0x00) return null;
+            else if (flag != 0x01) throw new Exception();
+
+            var length = reader.ReadInt32();
+            var data = reader.ReadBytes(length);
+            return new PrefixedString(Encoding.Default.GetString(data));
+
             // Decode using local encoding
 
         }
@@ -40,19 +41,29 @@ namespace ArcanumFileFormats.Utils
 			return new ArtId(){ path = reader.ReadInt32().ToString("X2") };
         }
 
+
+        public static Location ReadLocation(this BinaryReader reader)
+        {
+            return ReadLocation_(reader, false);
+        }
+
         /// <summary>
         /// Reads a 8-byte game location from the stream.
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="loc"></param>
-        public static Location ReadLocation(this BinaryReader reader)
+        public static Location ReadLocation_(this BinaryReader reader, bool force = false)
         {
             var loc = new Location();
-            if (reader.ReadByte() != 0x00)
+            if (!force)
             {
-                loc.X = reader.ReadInt32();
-                loc.Y = reader.ReadInt32();
+                var flag = reader.ReadByte();
+                if (flag == 0x00) return null;
+                else if (flag != 0x01) throw new Exception();
             }
+
+            loc.X = reader.ReadInt32();
+            loc.Y = reader.ReadInt32();
             return loc;
         }
 
@@ -64,16 +75,18 @@ namespace ArcanumFileFormats.Utils
 		public static ObjectGuid ReadObjectGuid_(this BinaryReader reader, bool force = false)
         {
             var result = new ObjectGuid();
-			if (force || reader.ReadByte () != 0x00) 
-			{
-				result.Type = reader.ReadInt16 ();
-				result.Foo0 = reader.ReadInt16 ();
-				result.Foo2 = reader.ReadInt32 ();
-				var guidData = reader.ReadBytes (16);
-				result.GUID = new Guid (guidData);
-				return result;
-			}
-			return null;
+            if (!force)
+            {
+                var flag = reader.ReadByte();
+                if (flag == 0x00) return null;
+                else if (flag != 0x01) throw new Exception();
+            }
+            result.Type = reader.ReadInt16 ();
+			result.Foo0 = reader.ReadInt16 ();
+			result.Foo2 = reader.ReadInt32 ();
+			var guidData = reader.ReadBytes (16);
+			result.GUID = new Guid (guidData);
+			return result;
         }
 
         public static ObjectGuid ReadObjectGuid(this BinaryReader reader)
@@ -116,10 +129,9 @@ namespace ArcanumFileFormats.Utils
 
 		public static Tuple<T[], int[]> ReadArray<T>(this BinaryReader reader)
         {
-            if (reader.ReadByte() == 0x00)
-            {
-                return null;
-            }
+            var flag = reader.ReadByte();
+            if (flag == 0x00) return null;
+            else if(flag != 0x01) throw new Exception();
 
             var elementSize = reader.ReadInt32();
             var elementCount = reader.ReadInt32();
@@ -135,26 +147,36 @@ namespace ArcanumFileFormats.Utils
                 result = new List<T>();
 
                 Type this_type = MethodBase.GetCurrentMethod().DeclaringType;
-                MethodInfo ReadMethod = this_type.GetMethod("Read" + typeof(T).Name);
+
+                List<Object> parameters = new List<Object>() { reader };
+                string methodName = "Read" + typeof(T).Name;
+                if (new string[] { "ObjectGuid", "Location" }.Contains(typeof(T).Name))
+                {
+                    methodName += "_";
+                    parameters.Add(true);
+                }
+                MethodInfo ReadMethod = this_type.GetMethod(methodName);
+
+
 
                 for (int i = 0; i < elementCount; i++)
-				{	
-
-					var obj = ReadMethod.Invoke (this_type, new Object[] {reader});
-					result.Add ((T)obj);
-                }
-                var count = reader.ReadInt32();
-				flags = new Int32[count];
-
-                for (var i = 0; i < count; i++)
                 {
-					flags[i] = reader.ReadInt32();
+
+                    var obj = ReadMethod.Invoke(this_type, parameters.ToArray());
+                    result.Add((T)obj);
                 }
-
-
-				return new Tuple<T[], int[]>(result.ToArray(), flags);
             }
-			return null;
+
+            var flag_cnt_int32 = reader.ReadInt32();
+			flags = new Int32[flag_cnt_int32];
+
+            for (var i = 0; i < flag_cnt_int32; i++)
+            {
+				flags[i] = reader.ReadInt32();
+            }
+
+
+			return payloadSize > 0 ? new Tuple<T[], int[]>(result.ToArray(), flags) : null;
         }
 
 		public static T[] ReadObjectFlags<T>(this BinaryReader reader) where T : struct, IConvertible

@@ -125,6 +125,7 @@
     <Compile Include="ObjectsNew\ObjectClass\Written.cs" />
     <Compile Include="ObjectsNew\GameObjectHeader.cs" />
     <Compile Include="Utils\OrderFields.cs" />
+    <Compile Include="Utils\temp.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
